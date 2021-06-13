@@ -12,14 +12,14 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body>
+<body >
     <div id="app" class="">
         <div class="flex-col w-full md:flex md:flex-row md:min-h-screen bg-gray-50">
             <div class="flex flex-col flex-shrink-0 w-full bg-white shadow-xl text-gray-700 md:w-64">
                 <div class="flex flex-row items-center justify-between flex-shrink-0 py-4">
                     <a href="/" class="px-8 focus:outline-none">
                         <div class="inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg"
+                            <svg xmlns="http://www.w3.org/2000/svg " @click.prevent="GetData()"
                                 class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -142,6 +142,7 @@
             </section>
         </div>
     </div>
+    <div class="" id="demo"></div>
     <footer>
         <div class="bg-gray-100">
             <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
@@ -199,6 +200,7 @@
     <script>
         hljs.highlightAll();
     </script>
+     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
         new Vue({
@@ -212,25 +214,19 @@
                 name: '',
                 date: '',
 
-                snippets: [
-                    {
-                        title: 'Truncating Text in PHP',
-                        description: 'This solution is for truncating the text so that it fits on the page',
-                        code: 'strlen($Variable) > 50 ? substr($Variable, 0, 50) . "..." : $Variable;',
-                        name: 'Peter Munene',
-                        id: '12/15/2021',
-                    },
-                    {
-                        title: 'Lorem ipsum dolor sit.',
-                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
-                        code: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quae',
-                        name: 'Peter Munene',
-                        id: '12/6/2021',
-                    }
-
-                ]
+                snippets: [],
+            },
+            mounted() {
+                this.GetData();
             },
             methods: {
+                GetData() {
+                    fetch("https://munenepeter.github.io/php-snippets/snippets.json")
+                        .then(response => response.json())
+                        .then((data) => {
+                            this.snippets = data;
+                        });
+                },
                 AddSnippet() {
 
                     this.snippets.push({

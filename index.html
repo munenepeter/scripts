@@ -12,7 +12,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body >
+<body>
     <div id="app" class="">
         <div class="flex-col w-full md:flex md:flex-row md:min-h-screen bg-gray-50">
             <div class="flex flex-col flex-shrink-0 w-full bg-white shadow-xl text-gray-700 md:w-64">
@@ -100,7 +100,7 @@
                 </section>
                 <div v-for="snippet in snippets" v-bind:key="snippet.id" class="all">
                     <div class="container flex flex-col items-center px-5 py-2 mx-auto">
-                        <div class="flex flex-col w-full mb-2   text-center">
+                        <div class="flex flex-col w-full mb-2  text-center">
                             <div class="w-full mx-auto lg:w-1/2 ">
                                 <h1
                                     class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
@@ -111,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container items-center px-5 mx-auto lg:px-28 ">
+                    <div class="container items-center px-5 mx-auto lg:px-28 text-left">
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
                                 <div class="flex justify-between p-4">
@@ -141,8 +141,7 @@
                 </div>
             </section>
         </div>
-    </div>
-    <div class="" id="demo"></div>
+    </div> 
     <footer>
         <div class="bg-gray-100">
             <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
@@ -200,7 +199,6 @@
     <script>
         hljs.highlightAll();
     </script>
-     
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
         new Vue({
@@ -220,7 +218,7 @@
                 this.GetData();
             },
             methods: {
-                GetData() {
+                 GetData() {
                     fetch("https://munenepeter.github.io/php-snippets/snippets.json")
                         .then(response => response.json())
                         .then((data) => {
@@ -236,6 +234,13 @@
                         code: this.code,
                         name: this.name
                     });
+                    // fetch("https://munenepeter.github.io/php-snippets/snippets.json", {
+                    //     body: this.snippets,
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "application/json",
+                    //     },
+                    // }).then(this.GetData());
                     //remove the values in form
                     this.title = "";
                     this.description = "";

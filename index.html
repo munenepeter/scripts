@@ -46,7 +46,7 @@
             <section class="text-gray-700 mt-4 w-full">
                 <section>
                     <div class="container items-center px-5 py-12 lg:px-20">
-                        <form v-on:submit.prevent="AddSnippet" method="POST"
+                        <form method="POST"
                             class="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
                             <div class="flex flex-wrap mb-6 -mx-3">
                                 <div class="w-full px-3">
@@ -78,30 +78,23 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap mb-2 -mx-3">
-                                <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
+                                <div class="w-full px-3 mb-6 ">
                                     <label class="text-base leading-7 text-gray-500" for="email"> Name </label>
                                     <input v-model="name"
                                         class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
                                         id="name" type="name" name="name" placeholder="John Doe">
                                 </div>
-                                <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-                                    <label class="text-base leading-7 text-gray-500" for="date"> Date </label>
 
-                                    <input v-model="date"
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
-                                        id="date" type="date" name="date" placeholder="John Doe">
-
-                                </div>
                             </div>
                             <div class="flex items-center w-full pt-4">
-                                <button type="submit" value="add" 
+                                <button type="submit" value="add" @click.prevent="AddSnippet"
                                     class="w-full py-3 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 ">
                                     Add </button>
                             </div>
                         </form>
                     </div>
                 </section>
-                <div v-for="snippet in snippets" class="all">
+                <div v-for="snippet in snippets" v-bind:key="snippet.id" class="all">
                     <div class="container flex flex-col items-center px-5 py-2 mx-auto">
                         <div class="flex flex-col w-full mb-2   text-center">
                             <div class="w-full mx-auto lg:w-1/2 ">
@@ -121,7 +114,7 @@
                                     <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black ">
                                         {{snippet.name}} </span>
                                     <span
-                                        class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{snippet.date}}</span>
+                                        class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{snippet.id}}</span>
                                 </div>
                                 <div class="p-2">
                                     <div class="shadow-md p-4">
@@ -221,28 +214,34 @@
                         description: 'This solution is for truncating the text so that it fits on the page',
                         code: 'strlen($Variable) > 50 ? substr($Variable, 0, 50) . "..." : $Variable;',
                         name: 'Peter Munene',
-                        date: '12/15/2021',
+                        id: '12/15/2021',
                     },
                     {
                         title: 'Lorem ipsum dolor sit.',
                         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
                         code: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quae',
                         name: 'Peter Munene',
-                        date: '12/15/2021',
+                        id: '12/6/2021',
                     }
 
                 ]
             },
             methods: {
-                AddSnippet(){
-                    this.snippets.push(trim(this.title), this.description, trim(this.code), this.name, this.date)
-                },
-                 openStorage() {
-                    return JSON.parse(localStorage.getItem('form'))
-                },
-                saveStorage(form) {
-                    localStorage.setItem('form', JSON.stringify(form))
-                },
+                AddSnippet() {
+
+                    this.snippets.push({
+                        id: Date.now(),
+                        title: this.title,
+                        description: this.description,
+                        code: this.code,
+                        name: this.name
+                    });
+                    //remove the values in form
+                    this.title = "";
+                    this.description = "";
+                    this.code = "";
+                    this.name = "";
+                }
             }
 
         });

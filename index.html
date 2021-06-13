@@ -60,9 +60,9 @@
                     </li>
                 </ul>
             </nav>
-        </div> 
-        
-        <section class="text-gray-700 mt-4">
+        </div>
+
+        <section id="app" class="text-gray-700 mt-4 w-full">
             <section>
                 <div class="container items-center px-5 py-12 lg:px-20">
                     <form
@@ -72,16 +72,18 @@
                                 <label class="text-base leading-7 text-gray-500" for="grid-title"> Title </label>
                                 <input
                                     class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
-                                    id="grid-title" type="text" name="title" placeholder="What the code does" required="">
+                                    id="grid-title" type="text" name="title" placeholder="What the code does"
+                                    required="">
                             </div>
-                           
+
                         </div>
                         <div class="flex flex-wrap mb-6 -mx-3">
                             <div class="w-full px-3">
                                 <label class="text-base leading-7 text-gray-500" for="description"> Description </label>
                                 <textarea
                                     class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
-                                    id="description" type="text" name="description" placeholder="Message..." required=""></textarea>
+                                    id="description" type="text" name="description" placeholder="Message..."
+                                    required=""></textarea>
                             </div>
                         </div>
                         <div class="flex flex-wrap mb-6 -mx-3">
@@ -89,7 +91,8 @@
                                 <label class="text-base leading-7 text-gray-500" for="description"> Code</label>
                                 <textarea
                                     class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
-                                    id="description" type="text" name="description" placeholder="<?php" required=""></textarea>
+                                    id="description" type="text" name="description" placeholder="<?php"
+                                    required=""></textarea>
                             </div>
                         </div>
                         <div class="flex flex-wrap mb-2 -mx-3">
@@ -101,11 +104,11 @@
                             </div>
                             <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                                 <label class="text-base leading-7 text-gray-500" for="date"> Date </label>
-                               
-                                    <input
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
-                                        id="date" type="date" name="date" placeholder="John Doe">
-                                   
+
+                                <input
+                                    class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
+                                    id="date" type="date" name="date" placeholder="John Doe">
+
                             </div>
                         </div>
                         <div class="flex items-center w-full pt-4">
@@ -115,18 +118,14 @@
                         </div>
                     </form>
                 </div>
-            </section> 
+            </section>
             <div class="container flex flex-col items-center px-5 py-2 mx-auto">
-                <div class="flex flex-col w-full mb-2 text-left ">
+                <div class="flex flex-col w-full mb-2   text-center">
                     <div class="w-full mx-auto lg:w-1/2 ">
                         <h1
                             class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
-                            A small headline to switch your visitors into users. </h1>
-                        <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 "> Right. Say that again.
-                            No,
-                            no, George, look, it's just an act, right? Okay, so 9:00 you're strolling through the
-                            parking lot,
-                            you see us struggling in the car.
+                            {{title}} </h1>
+                        <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{description}}
                         </p>
                     </div>
                 </div>
@@ -135,11 +134,11 @@
                 <div class="flex flex-wrap justify-center">
                     <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
                         <div class="p-8">
-                            <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">You're about to
-                                launch
-                                soon and must be 100% focused on your product. Don't loose precious days designing,
-                                coding the
-                                landing page and testing . </p>
+                            <div class="flex justify-between">
+                                <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black "> {{name}} </a>
+                                    <span class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{date}}</a>
+                            </div>
+                            <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{code}} </p>
                             <div class="flex justify-between">
                                 <a href="#"
                                     class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
@@ -149,19 +148,82 @@
                                     title="read more"> Delete</a>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </section>
     </div>
-
-
+    <footer>
+        <div class="bg-gray-100">
+            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    <span class="ml-3 text-xl">Snippets</span>
+                </a>
+                <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2021 Peter —
+                    <a href="https://twitter.com/peternjega7" rel="noopener noreferrer" class="text-gray-600 ml-1"
+                        target="_blank">@peternjega7</a>
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
     <!-- and it's easy to individually load additional languages -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/languages/php.min.js"></script>
     <script>
         hljs.highlightAll();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+
+            data: {
+                title: 'Lorem ipsum dolor sit.',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
+                code: 'code',
+                name: 'Peter Munene',
+                date: '12/15/2021',
+            }
+
+        });
+
     </script>
 </body>
 

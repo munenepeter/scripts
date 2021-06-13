@@ -119,33 +119,38 @@
                     </form>
                 </div>
             </section>
-            <div class="container flex flex-col items-center px-5 py-2 mx-auto">
-                <div class="flex flex-col w-full mb-2   text-center">
-                    <div class="w-full mx-auto lg:w-1/2 ">
-                        <h1
-                            class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
-                            {{title}} </h1>
-                        <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{description}}
-                        </p>
+            <div v-for="snippet in snippets" class="all">
+                <div class="container flex flex-col items-center px-5 py-2 mx-auto">
+                    <div class="flex flex-col w-full mb-2   text-center">
+                        <div class="w-full mx-auto lg:w-1/2 ">
+                            <h1
+                                class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
+                                {{snippet.title}} </h1>
+                            <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{snippet.description}}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container items-center px-5 mx-auto lg:px-28 ">
-                <div class="flex flex-wrap justify-center">
-                    <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
-                        <div class="p-8">
-                            <div class="flex justify-between">
-                                <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black "> {{name}} </a>
-                                    <span class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{date}}</a>
+                <div class="container items-center px-5 mx-auto lg:px-28 ">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
+                            <div class="flex justify-between p-4">
+                                <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black "> {{snippet.name}} </span>
+                                <span class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{snippet.date}}</span>
                             </div>
-                            <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{code}} </p>
-                            <div class="flex justify-between">
-                                <a href="#"
-                                    class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
-                                    title="read more"> Edit</a>
-                                <a href="#"
-                                    class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
-                                    title="read more"> Delete</a>
+                            <div class="p-2">
+                                <div class="shadow-md p-4">
+                                    <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">{{snippet.code}}
+                                    </p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <a href="#"
+                                        class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
+                                        title="read more"> Edit</a>
+                                    <a href="#"
+                                        class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
+                                        title="read more"> Delete</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -157,9 +162,10 @@
         <div class="bg-gray-100">
             <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
                 <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                     </svg>
                     <span class="ml-3 text-xl">Snippets</span>
                 </a>
@@ -215,11 +221,24 @@
             el: '#app',
 
             data: {
-                title: 'Lorem ipsum dolor sit.',
-                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
-                code: 'code',
-                name: 'Peter Munene',
-                date: '12/15/2021',
+
+                snippets: [
+                    {
+                        title: 'Lorem ipsum dolor sit.',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
+                        code: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quae',
+                        name: 'Peter Munene',
+                        date: '12/15/2021',
+                    },
+                    {
+                        title: 'Lorem ipsum dolor sit.',
+                        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.',
+                        code: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quae',
+                        name: 'Peter Munene',
+                        date: '12/15/2021',
+                    }
+
+                ]
             }
 
         });

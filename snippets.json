@@ -1,0 +1,16 @@
+
+{"snippets" : [{
+                        "title": "Truncating Text in PHP",
+                        "description": "This solution is for truncating the text so that it fits on the page",
+                        "code": "strlen($Variable) > 50 ? substr($Variable, 0, 50) . '' : $Variable;",
+                        "name": "Peter Munene",
+                        "id": "12/15/2021"
+                    },
+                    {
+                        "title": "Lorem ipsum dolor sit.",
+                        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit.Rerum, quidem.",
+                        "code": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quae",
+                        "name": "Peter Munene",
+                        "id": "12/6/2021"
+                    }]
+                }

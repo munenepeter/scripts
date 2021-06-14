@@ -9,8 +9,15 @@
                     {
                         "title": "Another snippet.",
                         "description": "Another description.",
-                        "code": "$sample code",
+                        "code": "$sample->code()",
                         "name": "Peter Munene",
                         "id": "12/6/2021"
-                    }                      
+                    },
+                       {
+                        "title": "My class",
+                        "description": "Another description.",
+                        "code": "Class MyClass{ public function MyFunction(){}}",
+                        "name": "Peter Munene",
+                        "id": "14/6/2021"
+                    }                                          
 ]

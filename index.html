@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PHP Snippets</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
+        integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.0-canary.14/tailwind.min.css"
         integrity="sha512-zXhmHxwXn8kUvZApt3iuxFG7cAHa2wongnyRnq2uAxppI5t/J5pz7I0mrm409qZaAu4KLhRtFTaNhO86OWQv5A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -51,7 +54,7 @@
                 <section>
                     <div class="container items-center px-5 py-12 lg:px-20">
                         <form method="POST"
-                            class="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
+                            class="flex flex-col w-full p-4 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
                             <div class="flex flex-wrap mb-6 -mx-3">
                                 <div class="w-full px-3">
                                     <label class="text-base leading-7 text-gray-500" for="grid-title"> Title </label>
@@ -122,9 +125,7 @@
                                 </div>
                                 <div class="p-2">
                                     <div class="shadow-md p-4">
-                                        <pre>
-                                            <code class="language-php">{{snippet.code }}</code>
-                                        </pre>
+                                        <pre class="language-php"><code>{{snippet.code}}</code></pre>
                                     </div>
                                     <div class="flex justify-between">
                                         <a href="#"
@@ -139,9 +140,9 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> 
         </div>
-    </div> 
+    </div>
     <footer>
         <div class="bg-gray-100">
             <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
@@ -192,12 +193,22 @@
             </div>
         </div>
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
-    <!-- and it's easy to individually load additional languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-php.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+ 
     <script>
-        hljs.highlightAll();
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true,
+            'break-lines': 80,
+            'indent': 2,
+            'remove-initial-line-feed': false,
+            'tabs-to-spaces': 4,
+            'spaces-to-tabs': 4
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
@@ -205,20 +216,19 @@
             el: '#app',
 
             data: {
-
                 title: '',
                 description: '',
                 code: '',
                 name: '',
                 date: '',
-
+                //the array of all the snippets   
                 snippets: [],
             },
             mounted() {
                 this.GetData();
             },
             methods: {
-                 GetData() {
+                GetData() {
                     fetch("https://munenepeter.github.io/php-snippets/snippets.json")
                         .then(response => response.json())
                         .then((data) => {

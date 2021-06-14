@@ -50,7 +50,7 @@
                 </nav>
             </div>
 
-            <section class="text-gray-700 mt-4 w-full">
+            <section class=" mt-4 w-full">
                 <section>
                     <div class="container items-center px-5 py-12 lg:px-20">
                         <form method="POST"
@@ -104,9 +104,9 @@
                 <div v-for="snippet in snippets" v-bind:key="snippet.id" class="all">
                     <div class="container flex flex-col items-center px-5 py-2 mx-auto">
                         <div class="flex flex-col w-full mb-2  text-center">
-                            <div class="w-full mx-auto lg:w-1/2 ">
+                            <div class="w-full mt-4 mb-6 mx-auto lg:w-1/2 ">
                                 <h1
-                                    class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
+                                    class="mx-auto  text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
                                     {{snippet.title}} </h1>
                                 <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">
                                     {{snippet.description}}

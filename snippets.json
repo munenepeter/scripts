@@ -9,7 +9,7 @@
                     {
                         "title": "Another snippet.",
                         "description": "Another description.",
-                        "code": "$sample->code()",
+                        "code": "$this->code('This is an example')",
                         "name": "Peter Munene",
                         "id": "12/6/2021"
                     },

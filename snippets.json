@@ -15,9 +15,16 @@
                     },
                        {
                         "title": "My class",
-                        "description": "Another description.",
-                        "code": "Class MyClass{ public function MyFunction(){}}",
+                        "description": "This is a simple class with a function.",
+                        "code": "Class MyClass{\n public function MyFunction()\n{\n}}",
                         "name": "Peter Munene",
                         "id": "14/6/2021"
-                    }                                          
+                    }, 
+                    {
+                        "title": "Helper function",
+                        "description": "This is a helper function to return a chosen view.",
+                        "code": "function View(String $name, $data = [])\n{\n extract($data);\n return require('/views'. $name'.view.php);}}",
+                        "name": "Peter Munene",
+                        "id": "13/6/2021"
+                    }                                         
 ]

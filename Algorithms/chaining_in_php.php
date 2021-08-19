@@ -42,4 +42,4 @@ function response($data) {
     return $class;
 }
 
-response('Hello World')->header('Content-Type');
+response('Hello World')->header('Goodbye World');

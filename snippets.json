@@ -23,7 +23,7 @@
                     {
                         "title": "Helper function",
                         "description": "This is a helper function to return a chosen view.",
-                        "code": "function View(String $name, $data = []){\n extract($data);\n return require('/views'. $name'.view.php);\n}",
+                        "code": "function View(String $name, $data = []){\n extract($data);\n return require('../path/to/file'. $name'.view.php);\n}",
                         "name": "Peter Munene",
                         "id": "13/6/2021"
                     }                                         

@@ -43,3 +43,27 @@ function response($data) {
 }
 
 response('Hello World')->header('Goodbye World');
+
+
+class DB{
+
+    private $data;
+    public static function table($table) {
+
+        $instance = new self();
+        $instance->data = "SELECT * FROM ${$table};";
+
+        return $instance;
+    }
+    public function where($column, $value){
+     $this->data = //I have no idea how to place this!!!
+    }
+    public function get() {
+        return json_encode($this->data);
+    }
+}
+$testData  = DB::table("users")->where('name', 'peter')->get(); //works
+print_r($testData);
+
+
+

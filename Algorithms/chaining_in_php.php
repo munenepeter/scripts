@@ -48,17 +48,23 @@ response('Hello World')->header('Goodbye World');
 class DB{
 
     private $data;
+    private $table;
+    private $instance;
     public static function table($table) {
 
-        $instance = new self();
-        $instance->data = "SELECT * FROM ${$table};";
+        $instance->instance = new self();
+        $instance->table = $table};
 
-        return $instance;
+        return $instance->instance;
     }
     public function where($column, $value){
-     $this->data = //I have no idea how to place this!!!
+        
+         $this->data = "SELECT * FROM {$this->table} WHERE {$column} = {$value};";
+        
+         return $this->instance;   
     }
     public function get() {
+        
         return json_encode($this->data);
     }
 }

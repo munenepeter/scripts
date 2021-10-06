@@ -1,10 +1,16 @@
 <?php
 
+  function test($name){
+      
+      return trim($name);
+ }
+
 class Str {
     private static $methods = [
         'upper' => 'strtoupper',
         'lower' => 'strtolower',
-        'len' => 'strlen'
+        'len' => 'strlen',
+        'trim' => 'test'        
     ];
 
     public static function __callStatic(string $method, array $parameters){
@@ -17,6 +23,9 @@ class Str {
     }
 }
 
-echo Str::lower('Hello') . '<br>';
-echo Str::upper('Hello') . '<br>';
-echo Str::len('Hello') . '<br>';
+echo Str::lower('Hello') . PHP_EOL;
+echo Str::upper('Hello') . PHP_EOL;
+echo Str::len('Hello') . PHP_EOL;
+echo Str::trim("   Helllo   ") . PHP_EOL;
+
+

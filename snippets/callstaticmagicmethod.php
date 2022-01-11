@@ -23,9 +23,9 @@ class Str {
     }
 }
 
-echo Str::lower('Hello') . PHP_EOL;
-echo Str::upper('Hello') . PHP_EOL;
-echo Str::len('Hello') . PHP_EOL;
-echo Str::trim("   Helllo   ") . PHP_EOL;
+echo Str::lower('Hello') . PHP_EOL; // hello
+echo Str::upper('Hello') . PHP_EOL; // HELLO
+echo Str::len('Hello') . PHP_EOL; //13
+echo Str::trim("   Helllo   ") . PHP_EOL; // Helllo
 
 

@@ -1,2 +1,0 @@
-[/]Create a html file which will display In code what ever you are learning and build using tailwind CSS
-[*]

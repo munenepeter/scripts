@@ -1,0 +1,63 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// },
+
+	"Add Tailwind css":{
+		"scope": "javascript,html,php",
+		"prefix": "tailwind",
+		"body": "<script src=\"https://cdn.tailwindcss.com\"></script>\n",
+		"description": "Add the play cdn for Tailwind"
+	},
+	"Add Flowbite css & js":{
+		"scope": "javascript,html,php",
+		"prefix": "flowbite",
+		"body": "<link rel=\"stylesheet\" href=\"https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css\" />\n<script src=\"https://unpkg.com/flowbite@1.5.3/dist/flowbite.js\"></script>\n",
+		"description": "Add the flowbite assets"
+	},
+	"Add Axios js":{
+		"scope": "javascript,html,php",
+		"prefix": "axios",
+		"body": "<script src=\"https://unpkg.com/axios/dist/axios.min.js\"></script>\n",
+		"description": "Add the axios cdn"
+	},
+	"Add Vue js":{
+		"scope": "javascript,html,php",
+		"prefix": "vue",
+		"body": "<script src=\"https://unpkg.com/vue@3/dist/vue.global.js\"></script>\n",
+		"description": "Add the vue cdn"
+	},
+	"Add Apline js":{
+		"scope": "javascript,html,php",
+		"prefix": "alp",
+		"body": "<script src=\"https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js\"></script>\n",
+		"description": "Add the alpine cdn"
+	},
+	"Document design moode":{
+		"scope": "html",
+		"prefix": "des",
+		"body": "<script>\n\n document.designMode = \"on\"; \n</script>\n\n",
+		"description": "Add the alpine cdn"
+	},
+	"Red underline":{
+		"scope": "css,html,php",
+		"prefix": "red",
+		"body": "\n\n p,h1,h2,h3,h4,h5{border-bottom: 1px dashed red;} \n\n",
+		"description": "Add the alpine cdn"
+	}
+
+
+}

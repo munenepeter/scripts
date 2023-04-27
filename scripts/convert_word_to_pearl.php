@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * 
+ * In general the script takes in a text file with some keywords and assigns each and every keyword a color based on RGB
+ */
+
 function getRandColor() {
     $rgbColor = [];
     foreach (['r', 'g', 'b'] as $color) {

@@ -1,4 +1,8 @@
 <?php
+/**
+ * 
+ * Fun plays with static magic methods
+ */
 
   function test($name){
       

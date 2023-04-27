@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * 
+ * Checking if there would be a duplicate on a uniqid()
+ */
+
 $i = 0;
 while ($i < 100000) {
 

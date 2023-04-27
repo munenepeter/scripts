@@ -1,5 +1,8 @@
 <?php
-    //
+ /**
+ * 
+ * How to download a file
+ */
 
     function downloadFile($dir, $file) {
 

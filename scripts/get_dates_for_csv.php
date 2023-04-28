@@ -28,6 +28,11 @@ if (in_array('-w', $argv)) {
     $excludeWeekends = true;
 }
 
+$monthName = date('F', mktime(0, 0, 0, $month, 10));
+echo  PHP_EOL;
+echo "Getting dates for $monthName, $year with". ($excludeWeekends ? " Weekends..." : "out Weekends...").PHP_EOL;
+echo  PHP_EOL;
+
 // Get the number of days in the month
 $numDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
 

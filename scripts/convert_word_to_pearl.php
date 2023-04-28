@@ -2,46 +2,29 @@
 
 /**
  * 
- * In general the script takes in a text file with some keywords and assigns each and every keyword a color based on RGB
+ * The script reads a text file called "pearls.txt" which contains a list of keywords separated by commas. It then removes any 
+ *  whitespace characters around the keywords and removes any duplicates.
+
+ * For each unique keyword, the script generates a random RGB color code using the getRandColor() function. It then creates an 
+ *  associative array for each keyword containing the keyword itself and its corresponding color code.
+
+ * Finally, the script writes each keyword-color pair to a file called "kw.txt" in JSON format, with each line representing a single 
+ *  keyword-color object.
+
+ * Overall, the script's purpose is to assign a random color to each keyword in the input file and store the pairs for future use.
  */
 
+
 function getRandColor() {
-    $rgbColor = [];
-    foreach (['r', 'g', 'b'] as $color) {
-        //Generate a random number between 0 and 255.
-        $rgbColor[$color] = mt_rand(0, 255);
-    }
-    $colorCode = implode(",", $rgbColor);
-    return "rgb($colorCode)";
+    return sprintf('rgb(%d,%d,%d)', rand(0, 255), rand(0, 255), rand(0, 255));
 }
 
-//change to file
-
-$text = trim(file_get_contents("pearls.txt"));
-
-
-
-$kw = explode(",", $text);
-
-
-
-$kw = array_map(function ($v) {
-    return trim($v);
-}, $kw);
-
+$text = file_get_contents("pearls.txt");
+$kw = array_map('trim', explode(",", $text));
 $kq = array_unique($kw);
 
-$n = [];
+$result = array_map(function($value) {
+    return ['word' => $value, 'color' => getRandColor()];
+}, $kq);
 
-foreach ($kq as $key => $value) {
-    $n[] = [
-        'word' => $value,
-        'color' => getRandColor()
-    ];
-}
-
-//$n = array_unique($n);
-
-foreach ($n as $key) {
-    file_put_contents("kw.txt", json_encode($key). PHP_EOL, FILE_APPEND | LOCK_EX);
-}
+file_put_contents("kw.txt", json_encode($result, JSON_PRETTY_PRINT));

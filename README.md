@@ -1,2 +1,4 @@
-# php-snippets
-All of my php training exercises in one place!
+# scripts
+All of my scripts in one place
+
+> TO DO: Update the html view to display all the files

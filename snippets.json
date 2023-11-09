@@ -1,30 +1,30 @@
-
-[                    {
-                        "title": "Truncating Text in PHP",
-                        "description": "This solution is for truncating the text so that it fits on the page",
-                        "code": "strlen($Variable) > 50 ? substr($Variable, 0, 50) . '' : $Variable;",
-                        "name": "Peter Munene",
-                        "id": "12/15/2021"
-                    },
-                    {
-                        "title": "Another snippet.",
-                        "description": "Another description.",
-                        "code": "$this->code('This is an example')",
-                        "name": "Peter Munene",
-                        "id": "12/6/2021"
-                    },
-                       {
-                        "title": "My class",
-                        "description": "This is a simple class with a function.",
-                        "code": "Class MyClass{\n public function MyFunction(){\n}}",
-                        "name": "Peter Munene",
-                        "id": "14/6/2021"
-                    }, 
-                    {
-                        "title": "Helper function",
-                        "description": "This is a helper function to return a chosen view.",
-                        "code": "function View(String $name, $data = []){\n extract($data);\n return require('../path/to/file'. $name'.view.php);\n}",
-                        "name": "Peter Munene",
-                        "id": "13/6/2021"
-                    }                                         
+[
+    {
+        "title": "Truncating Text in PHP",
+        "description": "This solution is for truncating the text so that it fits on the page",
+        "code": "strlen($Variable) > 50 ? substr($Variable, 0, 50) . '' : $Variable;",
+        "name": "Peter Munene",
+        "id": "12/15/2021"
+    },
+    {
+        "title": "Another snippet.",
+        "description": "Another description.",
+        "code": "$this->code('This is an example')",
+        "name": "Peter Munene",
+        "id": "12/6/2021"
+    },
+    {
+        "title": "My class",
+        "description": "This is a simple class with a function.",
+        "code": "Class MyClass{\n public function MyFunction(){\n}}",
+        "name": "Peter Munene",
+        "id": "14/6/2021"
+    },
+    {
+        "title": "Helper function",
+        "description": "This is a helper function to return a chosen view.",
+        "code": "function View(String $name, $data = []){\n extract($data);\n return require('../path/to/file'. $name'.view.php);\n}",
+        "name": "Peter Munene",
+        "id": "13/6/2021"
+    }
 ]

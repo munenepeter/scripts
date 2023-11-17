@@ -29,4 +29,6 @@ npm install
 # Build assets
 npm run dev
 
+composer remove laravel-frontend-presets/tall
+
 echo "Laravel project '$project_name' created successfully in '$project_path'."

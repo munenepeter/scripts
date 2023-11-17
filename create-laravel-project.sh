@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/bash
+
+# bash -c "$(curl -sS https://raw.githubusercontent.com/munenepeter/scripts/main/create-laravel-project.sh)" my_laravel_project
 
 # Check if the correct number of arguments is provided
 if [ "$#" -ne 1 ]; then

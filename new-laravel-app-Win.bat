@@ -4,6 +4,9 @@ REM A Batch script that creates a new Laravel app in the specified folder
 REM and installs a TALL stack preset (Livewire, Tailwind, & Alpine) - https://github.com/laravel-frontend-presets/tall
 REM Since most apps will have auth, we will install the auth preset
 
+REM curl -o create-laravel-project.bat https://raw.githubusercontent.com/munenepeter/scripts/main/new-laravel-app-Win.bat && call create-laravel-project.bat <my_laravel_project>
+
+
 REM Usage: create-laravel-project.bat <project_name>
 
 REM Check if the correct number of arguments is provided

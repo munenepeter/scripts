@@ -8,12 +8,6 @@
 
 # bash -c "$(curl -sS https://raw.githubusercontent.com/munenepeter/scripts/main/create-laravel-project.sh)" my_laravel_project
 
-# Check if the correct number of arguments is provided
-if [ "$#" -ne 0 ]; then
-    echo "Usage: $0 <project_name>"
-    exit 1
-fi
-
 # Set the project name from the command line argument
 project_name=$0
 project_path=$(pwd)/$project_name

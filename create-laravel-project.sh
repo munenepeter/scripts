@@ -9,17 +9,16 @@
 # bash -c "$(curl -sS https://raw.githubusercontent.com/munenepeter/scripts/main/create-laravel-project.sh)" my_laravel_project
 
 # Check if the correct number of arguments is provided
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 0 ]; then
     echo "Usage: $0 <project_name>"
     exit 1
 fi
 
-echo  "Hi, the script will create a new laravel project in $project_name and install a TALL preset..."
-
 # Set the project name from the command line argument
-project_name=$1
+project_name=$0
 project_path=$(pwd)/$project_name
 
+echo  "Hi, the script will create a new laravel project in $project_name and install a TALL preset..."
 # Install Laravel
 composer create-project --prefer-dist laravel/laravel $project_name
 

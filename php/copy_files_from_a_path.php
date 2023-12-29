@@ -21,13 +21,17 @@ $source_folder = __DIR__ . '/../path/to/copy/from/';
 function move_files(string $source, string $destination) {
     // Remove "." and ".."
     $items = array_diff(scandir($source), ['.', '..']);
-    $itemsCount = count($items);
 
-    for ($i = 2; $i < $itemsCount; ++$i) {
-        $source_path = $source . '/' . $items[$i];
-        $destination_path = $destination . '/' . $items[$i];
 
-        if (is_dir($source_path)) {
+    foreach ($items as $item) {
+        $source_path = $source . '/' . $item;
+        $destination_path = $destination . '/' . $item;
+        
+        if (is_link($source_path)) {
+            //link to the intended symbolic link
+            symlink(readlink($source_path), $destination_path);
+            printf("Copied symlink: %s\n", $item);
+        } elseif (is_dir($source_path)) {
             // it's a dir, create the dest dir
             if (!file_exists($destination_path)) {
                 mkdir($destination_path);
@@ -35,14 +39,13 @@ function move_files(string $source, string $destination) {
             move_files($source_path, $destination_path);
         } else {
             if (copy($source_path, $destination_path)) {
-                printf("Copied: %s\n", $items[$i]);
+                printf("Copied: %s\n", $item);
             } else {
-                printf("Error copying %s\n", $items[$i]);
+                printf("Error copying %s\n", $item);
             }
         }
     }
 }
-
 //remove all pre-existing files first
  shell_exec('rm -rf $(ls | grep -v mv.php)');
 // if() === false){

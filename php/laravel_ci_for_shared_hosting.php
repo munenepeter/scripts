@@ -105,13 +105,12 @@ function move_files(string $source, string $destination): bool {
             }
             move_files($source_path, $destination_path);
         } else {
-            if (copy($source_path, $destination_path)) {
-                return true;
-            } else {
+            if (!copy($source_path, $destination_path)) {
                 return false;
             }
         }
     }
+    return true;
 }
 /**
  * Concatenate the relative path to the full path of where the laravel application is uplooded

@@ -8,13 +8,15 @@ declare(strict_types=1);
 |
 | This script is designed to be run from the command line. but can also be called programatically
 | It moves files and directories from a specified source folder, by default all files in public/ to where this script was uploaded
+|
+| If you're using github actions you can curl <your_site_url>/[script_name].php and the speficed actions will be done on your server.
 | 
 | 1. upload this script to the entry point of your application e.g public_html & update the constant LARAVEL_INSTALL_PATH
 | 2. call this file programatically, maybe use curl in your github actions
-| 3. you're done, that's it, the script has 
-|   a).copied your new front-end assets to publi_html or wherever you want
-|   b).cleared all logs for you
-|   c).created a symbolic link in public/storage which points to storage/app/public
+| 3. ...you're done, that's it, the script has 
+|   a).copied your new front-end assets (all files [laravel_install_path]/public) to public_html ([script_install_path])
+|   b).cleared all laravel & server logs for you (only logs that concern this application)
+|   c).created a symbolic link in [script_install_path]/storage which points to [laravel_install_path]/storage/app/public
 |
 */
 

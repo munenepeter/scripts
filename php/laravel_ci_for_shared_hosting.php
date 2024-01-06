@@ -18,7 +18,7 @@ declare(strict_types=1);
 |
 */
 
-define('LARAVEL_INSTALL_PATH', __DIR__.'/../chungu/');
+define('LARAVEL_INSTALL_PATH', __DIR__.'/path/to/laravel-app/install/');
 
 //remove all pre-existing files first
 exec('rm -rf $(ls | grep -v ' . basename(__FILE__) . ')', $output, $result_code);

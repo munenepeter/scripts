@@ -22,6 +22,11 @@ declare(strict_types=1);
 
 define('LARAVEL_INSTALL_PATH', __DIR__.'/path/to/laravel-app/install/');
 
+if(!file_exists(LARAVEL_INSTALL_PATH) || !is_dir(LARAVEL_INSTALL_PATH)){
+    printf("\033[31m ✓ \033[0m Error: seems like you have not updated your LARAVEL_INSTALL_PATH -> %s or it is not accessible\n", LARAVEL_INSTALL_PATH);
+    exit(1);
+}
+
 //remove all pre-existing files first
 exec('rm -rf $(ls | grep -v ' . basename(__FILE__) . ')', $output, $result_code);
 

@@ -10,12 +10,12 @@
 
 # Set the project name from the command line argument
 project_name=$0
-project_path=$(pwd)/$project_name
 
 echo  "Hi, the script will create a new laravel project in $project_name and install a TALL preset..."
 # Install Laravel
 composer create-project --prefer-dist laravel/laravel $project_name
 
+project_path=$(pwd)/$project_name
 # Change directory to the project folder
 cd $project_path
 

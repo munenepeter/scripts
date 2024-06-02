@@ -4,263 +4,334 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta http-equiv="refresh" content="30"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PHP Snippets</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"
         integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css" /> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.0-canary.14/tailwind.min.css"
-        integrity="sha512-zXhmHxwXn8kUvZApt3iuxFG7cAHa2wongnyRnq2uAxppI5t/J5pz7I0mrm409qZaAu4KLhRtFTaNhO86OWQv5A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
-    <div id="app" class="">
-        <div class="flex-col w-full md:flex md:flex-row md:min-h-screen bg-gray-50">
-            <div class="flex flex-col flex-shrink-0 w-full bg-white shadow-xl text-gray-700 md:w-64">
-                <div class="flex flex-row items-center justify-between flex-shrink-0 py-4">
-                    <a href="/" class="px-8 focus:outline-none">
-                        <div class="inline-flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg " @click.prevent="GetData()"
-                                class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                            <h2
-                                class="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-gray-500 lg:text-x lg:mr-8">
-                                Snippets </h2>
-                        </div>
+    <div class="py-2 bg-purple-100">
+        <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+            <!-- Desktop navbar -->
+            <header class="sticky top-0 z-10 w-full bg-white shadow rounded-2xl" x-data="{ open: false }">
+                <nav class="flex items-center justify-between px-4 h-14">
+                    <a class="text-lg font-semibold tracking-tight" href="#">
+                        Scripts
                     </a>
 
-                </div>
-                <nav class="flex-grow pb-4 pr-4 md:block md:pb-0 md:overflow-y-auto">
-                    <ul>
-                        <li class="hidden">
-                            <a class="block px-4 py-2 mt-2 text-base transition duration-500 ease-in-out transform border-l-4 border-blue-600 text-gray-500 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black"
-                                href="snippets.json">API</a>
-                        </li>
-                        <li v-for="snippet in snippets">
-                            <a class="block px-4 py-2 mt-2 text-base transition duration-500 ease-in-out transform border-l-4 border-blue-600 text-gray-500 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black"
-                                href="#">{{snippet.title}}</a>
+                    <ul class="items-center hidden space-x-2 text-sm font-medium text-purple-600 md:flex">
+                        <li>
+                            <a class="px-3 py-2 transition rounded-lg hover:text-blue-600 focus:text-blue-600 focus:outline-none hover:bg-blue-500/10 focus:bg-blue-500/10 focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+                                href="#">Dashboard</a>
                         </li>
 
+                        <li>
+                            <a class="px-3 py-2 text-blue-600 transition rounded-lg bg-blue-500/10 ring-2 ring-blue-500 ring-inset focus:outline-none"
+                                href="#">
+                                Sites
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="px-3 py-2 transition rounded-lg hover:text-blue-600 focus:text-blue-600 focus:outline-none hover:bg-blue-500/10 focus:bg-blue-500/10 focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+                                href="#">Teams</a>
+                        </li>
+
+                        <li>
+                            <a class="block ml-3 transition rounded-full focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                                href="#">
+                                <div class="relative w-8 h-8">
+                                    <div class="absolute inset-0 bg-purple-200 rounded-full animate-pulse"></div>
+
+                                    <img class="absolute inset-0 object-cover rounded-full"
+                                        src="https://thispersondoesnotexist.com/image" alt="">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Hamburger -->
+                    <div class="md:hidden">
+                        <button
+                            class="flex items-center justify-center w-10 h-10 -mr-2 text-blue-500 transition rounded-full hover:bg-purple-500/5 focus:bg-blue-500/10 focus:outline-none"
+                            x-on:click="open = !open" type="button">
+                            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M4.75 5.75H19.25" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M4.75 18.25H19.25" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M4.75 12H19.25" />
+                            </svg> </button>
+                    </div>
+                </nav>
+
+                <!-- Mobile menu -->
+                <nav class="px-2 md:hidden" x-show="open" x-cloak>
+                    <div class="border-t"></div>
+
+                    <ul class="flex flex-col py-2 space-y-1 text-sm font-medium text-purple-600">
+                        <li>
+                            <a class="block p-2 transition rounded-lg hover:text-blue-600 focus:text-blue-600 focus:outline-none hover:bg-blue-500/10 focus:bg-blue-500/10 focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+                                href="#">Dashboard</a>
+                        </li>
+
+                        <li>
+                            <a class="block p-2 text-blue-600 transition rounded-lg bg-blue-500/10 ring-2 ring-blue-500 ring-inset"
+                                href="#">
+                                Sites
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="block p-2 transition rounded-lg hover:text-blue-600 focus:text-blue-600 focus:outline-none hover:bg-blue-500/10 focus:bg-blue-500/10 focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+                                href="#">Teams</a>
+                        </li>
+
+                        <li>
+                            <a class="block p-2 transition rounded-lg hover:text-blue-600 focus:text-blue-600 focus:outline-none hover:bg-blue-500/10 focus:bg-blue-500/10 focus:ring-2 focus:ring-blue-500 focus:ring-inset"
+                                href="#">Settings</a>
+                        </li>
                     </ul>
                 </nav>
+            </header>
+
+            <div class="grid gap-2 my-12 md:gap-6 md:grid-cols-2">
+                <aside class="space-y-2">
+                    <h1 class="text-2xl font-semibold tracking-tight md:text-3xl">Personal Site</h1>
+
+                    <a class="inline-flex items-center space-x-1 font-medium" href="#">
+                        <svg class="text-green-500 w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M5.75 11.75C5.75 11.1977 6.19772 10.75 6.75 10.75H17.25C17.8023 10.75 18.25 11.1977 18.25 11.75V17.25C18.25 18.3546 17.3546 19.25 16.25 19.25H7.75C6.64543 19.25 5.75 18.3546 5.75 17.25V11.75Z" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M7.75 10.5V10.3427C7.75 8.78147 7.65607 7.04125 8.74646 5.9239C9.36829 5.2867 10.3745 4.75 12 4.75C13.6255 4.75 14.6317 5.2867 15.2535 5.9239C16.3439 7.04125 16.25 8.78147 16.25 10.3427V10.5" />
+                        </svg>
+                        <span>larsklopstra.nl</span>
+                    </a>
+                </aside>
+
+
             </div>
 
-            <section class=" mt-4 w-full">
-                <section>
-                    <div class="container items-center px-5 py-12 lg:px-20">
-                        <form method="POST"
-                            class="flex flex-col w-full p-4 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
-                            <div class="flex flex-wrap mb-6 -mx-3">
-                                <div class="w-full px-3">
-                                    <label class="text-base leading-7 text-gray-500" for="grid-title"> Title </label>
-                                    <input v-model="title"
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
-                                        id="grid-title" type="text" name="title" placeholder="What the code does"
-                                        required="">
-                                </div>
+            <section class="grid gap-6 my-6 md:grid-cols-3">
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <dl class="space-y-2">
+                        <dt class="text-sm font-medium text-purple-500">Unique views</dt>
 
-                            </div>
-                            <div class="flex flex-wrap mb-6 -mx-3">
-                                <div class="w-full px-3">
-                                    <label class="text-base leading-7 text-gray-500" for="description"> Description
-                                    </label>
-                                    <textarea v-model="description"
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
-                                        id="description" type="text" name="description" placeholder="Message..."
-                                        required=""></textarea>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap mb-6 -mx-3">
-                                <div class="w-full px-3">
-                                    <label class="text-base leading-7 text-gray-500" for="description"> Code</label>
-                                    <textarea v-model="code"
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
-                                        id="description" type="text" name="description" placeholder="<?php"
-                                        required=""></textarea>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap mb-2 -mx-3">
-                                <div class="w-full px-3 mb-6 ">
-                                    <label class="text-base leading-7 text-gray-500" for="email"> Name </label>
-                                    <input v-model="name"
-                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
-                                        id="name" type="name" name="name" placeholder="John Doe">
-                                </div>
+                        <dd class="text-5xl font-light md:text-6xl">192.1k</dd>
 
+                        <dd class="flex items-center space-x-1 text-sm font-medium text-green-500">
+                            <span>32k increase</span>
+
+                            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17.25 15.25V6.75H8.75" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17 7L6.75 17.25" />
+                            </svg>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <dl class="space-y-2">
+                        <dt class="text-sm font-medium text-purple-500">Bounce rate</dt>
+
+                        <dd class="text-5xl font-light md:text-6xl">21%</dd>
+
+                        <dd class="flex items-center space-x-1 text-sm font-medium text-red-500">
+                            <span>7% increase</span>
+
+                            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17.25 8.75V17.25H8.75" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17 17L6.75 6.75" />
+                            </svg>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="p-6 bg-white shadow rounded-2xl">
+                    <dl class="space-y-2">
+                        <dt class="text-sm font-medium text-purple-500">Average time on page</dt>
+
+                        <dd class="text-5xl font-light md:text-6xl">03:12</dd>
+
+                        <dd class="flex items-center space-x-1 text-sm font-medium text-green-500">
+                            <span>3% increase</span>
+
+                            <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17.25 15.25V6.75H8.75" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" d="M17 7L6.75 17.25" />
+                            </svg>
+                        </dd>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="grid gap-6 my-6 md:grid-cols-2">
+                <div class="p-2 space-y-2 bg-white shadow rounded-xl">
+                    <header class="px-4 py-2">
+                        <h2 class="text-xl font-semibold tracking-tight">Visits per page</h2>
+                    </header>
+
+                    <div class="border-t"></div>
+
+                    <div class="p-4">
+                        <dl class="-my-2 space-y-1">
+                            <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium text-purple-500 pb-2">
+                                <dt>Content</dt>
+
+                                <dt class="text-right">Views</dt>
+
+                                <dt class="text-right">Unique</dt>
                             </div>
-                            <div class="flex items-center w-full pt-4">
-                                <button type="submit" value="add" @click.prevent="AddSnippet"
-                                    class="w-full py-3 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 ">
-                                    Add </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-                <div v-for="snippet in snippets" v-bind:key="snippet.id" class="all">
-                    <div class="container flex flex-col items-center px-5 py-2 mx-auto">
-                        <div class="flex flex-col w-full mb-2  text-center">
-                            <div class="w-full mt-4 mb-6 mx-auto lg:w-1/2 ">
-                                <h1
-                                    class="mx-auto  text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
-                                    {{snippet.title}} </h1>
-                                <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">
-                                    {{snippet.description}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container items-center px-5 mx-auto lg:px-28 text-left">
-                        <div class="flex flex-wrap justify-center">
-                            <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
-                                <div class="flex justify-between p-4">
-                                    <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black ">
-                                        {{snippet.name}} </span>
-                                    <span
-                                        class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{snippet.id}}</span>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-4/5 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>/</dd>
+
+                                    <dd class="text-right">963</dd>
+
+                                    <dd class="text-right">567</dd>
                                 </div>
-                                <div class="p-2">
-                                    <div class="shadow-md p-4">
-                                        <pre class="language-php"><code>{{snippet.code}}</code></pre>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <a href="#"
-                                            class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
-                                            title="read more"> Edit</a>
-                                        <a href="#"
-                                            class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
-                                            title="read more"> Delete</a>
-                                    </div>
+                            </div>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-1/2 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>/blog</dd>
+
+                                    <dd class="text-right">414</dd>
+
+                                    <dd class="text-right">124</dd>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-1/4 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>/about-me</dd>
+
+                                    <dd class="text-right">251</dd>
+
+                                    <dd class="text-right">203</dd>
+                                </div>
+                            </div>
+                        </dl>
                     </div>
                 </div>
-            </section> 
+
+                <div class="p-2 space-y-2 bg-white shadow rounded-xl">
+                    <header class="px-4 py-2">
+                        <h2 class="text-xl font-semibold tracking-tight">Visits per country</h2>
+                    </header>
+
+                    <div class="border-t"></div>
+
+                    <div class="p-4">
+                        <dl class="-my-2 space-y-1">
+                            <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium text-purple-500 pb-2">
+                                <dt>Country</dt>
+
+                                <dt class="text-right">Views</dt>
+
+                                <dt class="text-right">Unique</dt>
+                            </div>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-2/3 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>Netherlands</dd>
+
+                                    <dd class="text-right">71k</dd>
+
+                                    <dd class="text-right">40k</dd>
+                                </div>
+                            </div>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-1/2 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>United States</dd>
+
+                                    <dd class="text-right">41k</dd>
+
+                                    <dd class="text-right">32k</dd>
+                                </div>
+                            </div>
+
+                            <div class="relative py-2 -mx-2">
+                                <div class="absolute inset-0 w-1/6 h-full rounded-lg bg-blue-500/5"></div>
+
+                                <div class="grid grid-cols-[2fr,1fr,1fr] gap-4 text-sm font-medium px-2 relative">
+                                    <dd>Germany</dd>
+
+                                    <dd class="text-right">36k</dd>
+
+                                    <dd class="text-right">27k</dd>
+                                </div>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="my-6">
+                <ul class="flex flex-wrap items-center justify-center gap-6 text-sm text-center text-purple-500">
+                    <li>
+                        <a class="transition hover:text-purple-800 focus:underline focus:outline-none"
+                            href="#">Careers</a>
+                    </li>
+
+                    <li>
+                        <a class="transition hover:text-purple-800 focus:underline focus:outline-none"
+                            href="#">Privacy</a>
+                    </li>
+
+                    <li>
+                        <a class="transition hover:text-purple-800 focus:underline focus:outline-none" href="#">Terms of
+                            service</a>
+                    </li>
+
+                    <li>
+                        <a class="transition hover:text-purple-800 focus:underline focus:outline-none"
+                            href="#">Support</a>
+                    </li>
+                </ul>
+            </footer>
         </div>
     </div>
-    <footer>
-        <div class="bg-gray-100">
-            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                    </svg>
-                    <span class="ml-3 text-xl">Snippets</span>
-                </a>
-                <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2021 Peter —
-                    <a href="https://twitter.com/peternjega7" rel="noopener noreferrer" class="text-gray-600 ml-1"
-                        target="_blank">@peternjega7</a>
-                </p>
-                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-                    <a class="text-gray-500">
-                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            class="w-5 h-5" viewBox="0 0 24 24">
-                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a class="ml-3 text-gray-500">
-                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            class="w-5 h-5" viewBox="0 0 24 24">
-                            <path
-                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                            </path>
-                        </svg>
-                    </a>
-                    <a class="ml-3 text-gray-500">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-                        </svg>
-                    </a>
-                    <a class="ml-3 text-gray-500">
-                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-                            <path stroke="none"
-                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
-                            </path>
-                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
-                        </svg>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-php.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
- 
+
     <script>
-        Prism.plugins.NormalizeWhitespace.setDefaults({
-            'remove-trailing': true,
-            'remove-indent': true,
-            'left-trim': true,
-            'right-trim': true,
-            'break-lines': 80,
-            'indent': 2,
-            'remove-initial-line-feed': false,
-            'tabs-to-spaces': 4,
-            'spaces-to-tabs': 4
-        });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-    <script>
-        new Vue({
-            el: '#app',
 
-            data: {
-                title: '',
-                description: '',
-                code: '',
-                name: '',
-                date: '',
-                //the array of all the snippets   
-                snippets: [],
-            },
-            mounted() {
-                this.GetData();
-            },
-            methods: {
-                GetData() {
-                    fetch("https://munenepeter.github.io/php-snippets/snippets.json")
-                        .then(response => response.json())
-                        .then((data) => {
-                            this.snippets = data;
-                        });
-                },
-                AddSnippet() {
+        const socket = new WebSocket("ws://127.0.0.1:8080");
 
-                    this.snippets.push({
-                        id: Date.now(),
-                        title: this.title,
-                        description: this.description,
-                        code: this.code,
-                        name: this.name
-                    });
-                    // fetch("https://munenepeter.github.io/php-snippets/snippets.json", {
-                    //     body: this.snippets,
-                    //     method: "POST",
-                    //     headers: {
-                    //         "Content-Type": "application/json",
-                    //     },
-                    // }).then(this.GetData());
-                    //remove the values in form
-                    this.title = "";
-                    this.description = "";
-                    this.code = "";
-                    this.name = "";
-                }
-            }
-
+        socket.addEventListener("open", (event) => {
+            socket.send("Hello Server!");
         });
 
+        socket.addEventListener("message", (event) => {
+            console.log("Message from server ", event.data);
+        });
     </script>
 </body>
 

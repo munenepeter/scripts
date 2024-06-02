@@ -1,0 +1,202 @@
+
+
+<body>
+    <div id="app" class="">
+        <div class="flex-col w-full md:flex md:flex-row md:min-h-screen bg-gray-50">
+            <div class="flex flex-col flex-shrink-0 w-full bg-white shadow-xl text-gray-700 md:w-64">
+                <div class="flex flex-row items-center justify-between flex-shrink-0 py-4">
+                    <a href="/" class="px-8 focus:outline-none">
+                        <div class="inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg " @click.prevent="GetData()"
+                                class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                            <h2
+                                class="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-gray-500 lg:text-x lg:mr-8">
+                                Snippets </h2>
+                        </div>
+                    </a>
+
+                </div>
+                <nav class="flex-grow pb-4 pr-4 md:block md:pb-0 md:overflow-y-auto">
+                    <ul>
+                        <li class="hidden">
+                            <a class="block px-4 py-2 mt-2 text-base transition duration-500 ease-in-out transform border-l-4 border-blue-600 text-gray-500 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black"
+                                href="snippets.json">API</a>
+                        </li>
+                        <li v-for="snippet in snippets">
+                            <a class="block px-4 py-2 mt-2 text-base transition duration-500 ease-in-out transform border-l-4 border-blue-600 text-gray-500 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black"
+                                href="#">{{snippet.title}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+
+            <section class=" mt-4 w-full">
+                <section>
+                    <div class="container items-center px-5 py-12 lg:px-20">
+                        <form method="POST"
+                            class="flex flex-col w-full p-4 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2">
+                            <div class="flex flex-wrap mb-6 -mx-3">
+                                <div class="w-full px-3">
+                                    <label class="text-base leading-7 text-gray-500" for="grid-title"> Title </label>
+                                    <input v-model="title"
+                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
+                                        id="grid-title" type="text" name="title" placeholder="What the code does"
+                                        required="">
+                                </div>
+
+                            </div>
+                            <div class="flex flex-wrap mb-6 -mx-3">
+                                <div class="w-full px-3">
+                                    <label class="text-base leading-7 text-gray-500" for="description"> Description
+                                    </label>
+                                    <textarea v-model="description"
+                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
+                                        id="description" type="text" name="description" placeholder="Message..."
+                                        required=""></textarea>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap mb-6 -mx-3">
+                                <div class="w-full px-3">
+                                    <label class="text-base leading-7 text-gray-500" for="description"> Code</label>
+                                    <textarea v-model="code"
+                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand"
+                                        id="description" type="text" name="description" placeholder="<?php"
+                                        required=""></textarea>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap mb-2 -mx-3">
+                                <div class="w-full px-3 mb-6 ">
+                                    <label class="text-base leading-7 text-gray-500" for="email"> Name </label>
+                                    <input v-model="name"
+                                        class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-gray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2"
+                                        id="name" type="name" name="name" placeholder="John Doe">
+                                </div>
+
+                            </div>
+                            <div class="flex items-center w-full pt-4">
+                                <button type="submit" value="add" @click.prevent="AddSnippet"
+                                    class="w-full py-3 text-base font-semibold text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 ">
+                                    Add </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <div v-for="snippet in snippets" v-bind:key="snippet.id" class="all">
+                    <div class="container flex flex-col items-center px-5 py-2 mx-auto">
+                        <div class="flex flex-col w-full mb-2  text-center">
+                            <div class="w-full mt-4 mb-6 mx-auto lg:w-1/2 ">
+                                <h1
+                                    class="mx-auto  text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">
+                                    {{snippet.title}} </h1>
+                                <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">
+                                    {{snippet.description}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container items-center px-5 mx-auto lg:px-28 text-left">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full lg:w-2/3 border-2 border-blue-100 shadow-lg">
+                                <div class="flex justify-between p-4">
+                                    <span class="font-semibold text-blue-600 lg:mb-0 hover:text-black ">
+                                        {{snippet.name}} </span>
+                                    <span
+                                        class=" font-semibold text-blue-600 lg:mb-0 hover:text-black ">{{snippet.id}}</span>
+                                </div>
+                                <div class="p-2">
+                                    <div class="shadow-md p-4">
+                                        <pre class="language-php"><code>{{snippet.code}}</code></pre>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <a href="#"
+                                            class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
+                                            title="read more"> Edit</a>
+                                        <a href="#"
+                                            class="inline-flex items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-black "
+                                            title="read more"> Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> 
+        </div>
+    </div>
+    <footer>
+        <div class="bg-gray-100">
+            <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white p-2 bg-indigo-500 rounded-full"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    <span class="ml-3 text-xl">Snippets</span>
+                </a>
+                <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2021 Peter —
+                    <a href="https://twitter.com/peternjega7" rel="noopener noreferrer" class="text-gray-600 ml-1"
+                        target="_blank">@peternjega7</a>
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-php.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+ 
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true,
+            'break-lines': 80,
+            'indent': 2,
+            'remove-initial-line-feed': false,
+            'tabs-to-spaces': 4,
+            'spaces-to-tabs': 4
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

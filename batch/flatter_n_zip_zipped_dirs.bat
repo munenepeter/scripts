@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 echo.
 echo ============================================================================================
-echo                                        Batch Script Description
+echo                                        Description
 echo ============================================================================================
 echo.
 echo This batch script automates the process of unzipping multiple zip files in a specified source directory,

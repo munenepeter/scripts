@@ -20,9 +20,7 @@ REM Edit the script to set the `source_dir` variable to the path of the director
 REM Run the script by double-clicking it or executing it from the command line.
 REM Check the destination folder (default is the user's `Documents/NewZippedFolders`) for  the newly created zip files.
 REM Review the log file for any warnings or errors during execution.
-echo.
 
-echo Are you sure you want to run this script?
 echo.
 set /p prompt="Are you sure you want to run this script? (Y/N): "
 if /i "!prompt!" NEQ "Y" (
@@ -35,8 +33,6 @@ set "source_dir=%USERPROFILE%\Documents\folders"
 set "destination_dir=%USERPROFILE%\Documents\NewZippedFolders"
 set "log_file=%destination_dir%\log.log"
 
-
-echo Please confirm your paths:
 echo.
 echo Source Directory: %source_dir%
 echo Destination Directory: %destination_dir%

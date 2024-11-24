@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poetry Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js" defer></script>
+    <style>
+        .butterfly {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .backdrop-blur {
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .poem-card {
+            width: 100%;
+        }
+
+        /* If any line in the poem is longer than 50 characters, take full width */
+        .poem-card[data-long-lines="true"] {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f0eee5;">
+    <div x-data="{
+        poems: [],
+        async init() {
+            try {
+                const response = await fetch('/poems.json');
+                this.poems = await response.json();
+            } catch (error) {
+                <!-- console.error('Error loading poems:', error); -->
+
+                this.poems = [
+                    {
+                        title: 'The Road Not Taken',
+                        author: 'Robert Frost',
+                        content: `Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;`
+                    },
+                    {
+                        title: 'Hope is the thing with feathers',
+                        author: 'Emily Dickinson',
+                        content: `Hope is the thing with feathers
+That perches in the soul,
+And sings the tune without the words,
+And never stops at all,`
+                    },
+                      {
+                        title: 'Long Line Example',
+                        author: 'Example Author',
+                        content: `This is a very long line that will cause the poem card to take up the full width of the container because it exceeds fifty characters
+                        Even though this line is shorter
+                        This poem will still be full width`
+                      }
+                ];
+            }
+        },
+        hasLongLines(content) {
+            return content.split('\n').some(line => line.length > 50);
+        }
+    }">
+        <!-- Decorative Elements -->
+        <div class="fixed inset-0 pointer-events-none overflow-hidden">
+            <svg class="absolute top-20 left-20 w-8 h-8 text-gray-400 butterfly" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L8 6l4 4-4 4 4 4 4-4-4-4 4-4z" />
+                <path d="M12 2l4 4-4 4 4 4-4 4" />
+            </svg>
+            <svg class="absolute top-40 right-32 w-6 h-6 text-gray-400 butterfly" style="animation-delay: 0.5s"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2L8 6l4 4-4 4 4 4 4-4-4-4 4-4z" />
+                <path d="M12 2l4 4-4 4 4 4-4 4" />
+            </svg>
+            <svg class="absolute bottom-32 left-40 w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2L12 9M12 15L12 22M2 12L9 12M15 12L22 12" />
+            </svg>
+            <svg class="absolute top-60 right-20 w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2L12 9M12 15L12 22M2 12L9 12M15 12L22 12" />
+            </svg>
+            <svg class="absolute bottom-20 right-40 w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M12 2L12 9M12 15L12 22M2 12L9 12M15 12L22 12" />
+            </svg>
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-4 py-12">
+            <h1 class="text-4xl font-serif text-center mb-12">Chungu's Poetry Collection</h1>
+
+            <div class="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
+                <template x-for="poem in poems" :key="poem.title">
+                    <div class="poem-card bg-white bg-opacity-80 backdrop-blur rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
+                        :data-long-lines="hasLongLines(poem.content)">
+                        <h2 class="text-2xl font-serif mb-2" x-text="poem.title"></h2>
+                        <h3 class="text-gray-600 mb-4 italic" x-text="'by ' + poem.author"></h3>
+                        <div class="whitespace-pre-line font-serif text-gray-800" x-text="poem.content"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

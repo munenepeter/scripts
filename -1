@@ -1,3 +1,0 @@
-[02-Jun-2024 20:20:51 Africa/Nairobi] PHP Warning:  socket_bind(): Unable to bind address [98]: Address already in use in /home/peter/Code/scripts/sse.php on line 74
-[02-Jun-2024 20:22:07 Africa/Nairobi] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/peter/Code/scripts/sse.php on line 7
-[02-Jun-2024 20:22:42 Africa/Nairobi] PHP Warning:  session_start(): Session cannot be started after headers have already been sent in /home/peter/Code/scripts/sse.php on line 7

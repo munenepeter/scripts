@@ -1,65 +1,102 @@
 @echo off
+setlocal enabledelayedexpansion
 
 echo Hello %username%, I'm here to help you clean up your computer :)
+echo This script will perform comprehensive system cleanup and optimization
 timeout /t 3 /nobreak > NUL
-echo Let's start
 
+:: Create a log file
+set "logfile=%userprofile%\Desktop\cleanup_log_%date:~-4,4%%date:~-10,2%%date:~-7,2%.txt"
+echo Cleanup started at: %date% %time% > "%logfile%"
 
-echo Deleting your Temprary files....
+:: Check for admin privileges
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Please run this script as Administrator!
+    pause
+    exit /b 1
+)
 
-@REM remove the echo below for it to run
-del /s /q %temp%\*.* 1>nul
+echo === Starting System Cleanup ===
 
+:: Clear Temporary Files
+echo Cleaning temporary files...
+rd /s /q "%temp%" 2>nul
+md "%temp%"
+del /s /q "%SystemRoot%\Temp\*.*" 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Temp\*.*" 2>nul
 
-@REM This folder contains the log about the frequently running application on your machine. 
-@REM c:\windows\Prefetch
+:: Clear Prefetch
+echo Cleaning Prefetch...
+del /s /q "%SystemRoot%\Prefetch\*.*" 2>nul
 
-del /s /q %SystemRoot%\Prefetch\*.* 1>nul
-timeout /t 2 /nobreak > NUL
+:: Clear Windows Update Cache
+echo Cleaning Windows Update Cache...
+net stop wuauserv 2>nul
+net stop bits 2>nul
+del /s /q "%SystemRoot%\SoftwareDistribution\Download\*.*" 2>nul
+net start wuauserv 2>nul
+net start bits 2>nul
 
-@REM This folder contains your Windows Update data 
-@REM c:\windows\softwaredistribution\download
-echo Deleting Windows updates Temprary files....
+:: Clear DNS Cache
+echo Cleaning DNS Cache...
+ipconfig /flushdns
 
+:: Clear Browser Caches (Chrome, Firefox, Edge)
+echo Cleaning Browser Caches...
+taskkill /F /IM "chrome.exe" 2>nul
+taskkill /F /IM "firefox.exe" 2>nul
+taskkill /F /IM "msedge.exe" 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Google\Chrome\User Data\Default\Cache\*.*" 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Mozilla\Firefox\Profiles\*.default\cache2\entries\*.*" 2>nul
+del /s /q "%USERPROFILE%\AppData\Local\Microsoft\Edge\User Data\Default\Cache\*.*" 2>nul
 
-del /s /q %SystemRoot%\SoftwareDistribution\Download\*.* 1>nul
-timeout /t 1 /nobreak > NUL
-
-
-
-
-echo Cleaning DNS cache.....
-
-@REM remove the echo below for it to run
-ipconfig/flushdns
-timeout /t 2 /nobreak > NUL
-
-echo Deleting unnecessary files in your Cache....
-echo Please follow the prompts outside of CMD
-
-@REM remove the echo below for it to run
-Cleanmgr
-timeout /t 2 /nobreak > NUL
-
-
-@REM echo Clearing Windows Store Cache......
+:: Clear Windows Store Cache
+echo Cleaning Windows Store Cache...
 WSReset.exe
 
-@REM Now lets change the user's in this case Admin's password
+:: Run Disk Cleanup
+echo Running Disk Cleanup...
+cleanmgr /sagerun:1
 
-echo Now let's change the Admin's password, Please be careful!!
-timeout /t 2 /nobreak > NUL
-echo We trust you have received the usual lecture from the local System Administrator... 
-echo It usually boils down to these three things:
-timeout /t 3 /nobreak > NUL
-echo    #1) Respect the privacy of others.
-timeout /t 2 /nobreak > NUL
-echo    #2) Think before you type.
-timeout /t 2 /nobreak > NUL
-echo    #3) And With great power comes great responsibility.
+:: Optimize System Performance
+echo Optimizing System Performance...
 
-timeout /t 2 /nobreak > NUL
+:: Disable unnecessary services
+echo Disabling unnecessary services...
+sc config "DiagTrack" start= disabled
+sc config "dmwappushservice" start= disabled
+sc config "SysMain" start= disabled
 
-@REM remove the echo below for it to run
+:: Clear Event Logs
+echo Clearing Event Logs...
+for /F "tokens=*" %%G in ('wevtutil el') do (
+    echo Clearing %%G
+    wevtutil cl "%%G" 2>nul
+)
 
-echo net user %username% *
+:: Defragment drives (only for HDDs)
+echo Checking drive type and defragmenting if needed...
+for /f "tokens=2 delims==" %%a in ('wmic volume get DriveLetter^,FileSystem /value ^| find "FileSystem"') do (
+    if "%%a"=="NTFS" (
+        defrag %SystemDrive% /A /V >> "%logfile%"
+    )
+)
+
+:: Run System File Checker
+echo Running System File Checker...
+sfc /scannow
+
+:: Optional: Change Password
+echo Do you want to change your password? (Y/N)
+set /p changepw=
+if /i "%changepw%"=="Y" (
+    echo Changing password for %username%...
+    net user %username% *
+)
+
+echo === Cleanup Complete ===
+echo Log file created at: %logfile%
+echo Please restart your computer for all changes to take effect.
+
+pause

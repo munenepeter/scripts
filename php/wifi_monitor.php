@@ -114,7 +114,7 @@ function generateHtmlReport($ssid, $status, $speed, $duration, $internetAccess) 
 function startHttpServer() {
     $port = 8080;
     
-    echo "Starting HTTP server on http:" . PHP_EOL;
+    echo "Starting HTTP server on http: //localhost:$port" . PHP_EOL;
 
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
         pclose(popen("start php -S localhost:$port -t " . __DIR__, "r"));

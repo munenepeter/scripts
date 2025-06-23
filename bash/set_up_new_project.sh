@@ -13,40 +13,49 @@
 # Usage: ./new-project.sh projectname
 
 PROJECT="$1"
+PHP_VERSION="$2"
 
-# Check if project name is provided and does not contain funny characters
-# no spaces, no special characters
-if [[ ! "$PROJECT" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-  echo "Error: Project name can only contain alphanumeric characters, underscores, and hyphens."
-  exit 1
-
-if [ -z "$PROJECT" ]; then
-  echo "Usage: $0 projectname"
+if [ -z "$PROJECT" ] || [ -z "$PHP_VERSION" ]; then
+  echo "Usage: $0 projectname php_version"
+  echo "Example: $0 suitecrm7 8.3"
   exit 1
 fi
 
 DOMAIN="${PROJECT}.local"
 DOCROOT="/var/www/$PROJECT"
 VHOST_CONF="/etc/apache2/sites-available/${DOMAIN}.conf"
+PHP_FPM_SOCK="/run/php/php${PHP_VERSION}-fpm.sock"
 
-# 1. Add to /etc/hosts
-if ! grep -q "$DOMAIN" /etc/hosts; then
-  echo "127.0.0.1  $DOMAIN" | sudo tee -a /etc/hosts > /dev/null
-  echo "[+] Added $DOMAIN to /etc/hosts"
+# Check and install PHP version if needed
+if ! php -v | grep -q "$PHP_VERSION"; then
+  echo "[i] PHP $PHP_VERSION not found. Installing..."
+  sudo apt update
+  sudo apt install -y php$PHP_VERSION php$PHP_VERSION-fpm
+  sudo apt install --no-install-recommends php$PHP_VERSION-cli php$PHP_VERSION-common php$PHP_VERSION-mbstring php$PHP_VERSION-xml php$PHP_VERSION-curl php$PHP_VERSION-mysql php$PHP_VERSION-zip php$PHP_VERSION-gd php$PHP_VERSION-bcmath php$PHP_VERSION-intl php$PHP_VERSION-json php$PHP_VERSION-opcache
+  sudo systemctl restart php${PHP_VERSION}-fpm
+  sudo systemctl enable php${PHP_VERSION}-fpm
+  echo "[+] Installed PHP $PHP_VERSION and FPM"
 else
-  echo "[i] $DOMAIN already exists in /etc/hosts"
+  echo "[✓] PHP $PHP_VERSION is already installed"
 fi
 
-# 2. Create project directory
+# Enable required Apache modules
+sudo a2enmod proxy_fcgi setenvif
+sudo a2enconf php${PHP_VERSION}-fpm
+sudo systemctl reload apache2
+
+# /etc/hosts
+if ! grep -q "$DOMAIN" /etc/hosts; then
+  echo "127.0.0.1  $DOMAIN" | sudo tee -a /etc/hosts > /dev/null
+fi
+
+# Create project dir
 if [ ! -d "$DOCROOT" ]; then
   sudo mkdir -p "$DOCROOT"
   sudo chown -R "$USER":www-data "$DOCROOT"
-  echo "[+] Created $DOCROOT"
-else
-  echo "[i] $DOCROOT already exists"
 fi
 
-# 3. Create Apache vhost config
+# Apache vhost config with PHP-FPM
 if [ ! -f "$VHOST_CONF" ]; then
   sudo tee "$VHOST_CONF" > /dev/null <<EOF
 <VirtualHost *:80>
@@ -59,17 +68,19 @@ if [ ! -f "$VHOST_CONF" ]; then
         Require all granted
     </Directory>
 
+    <FilesMatch \.php$>
+        SetHandler "proxy:unix:$PHP_FPM_SOCK|fcgi://localhost/"
+    </FilesMatch>
+
     ErrorLog \${APACHE_LOG_DIR}/${PROJECT}_error.log
     CustomLog \${APACHE_LOG_DIR}/${PROJECT}_access.log combined
 </VirtualHost>
 EOF
-
-  echo "[+] Created vhost config: $VHOST_CONF"
-else
-  echo "[i] Vhost config $VHOST_CONF already exists"
+  echo "[+] Created vhost for $DOMAIN with PHP $PHP_VERSION"
 fi
 
-# 4. Enable the site and reload Apache
+# Enable site & reload Apache
 sudo a2ensite "${DOMAIN}.conf"
 sudo systemctl reload apache2
-echo "[✓] Site $DOMAIN is now active at http://$DOMAIN"
+
+echo "[✓] $DOMAIN set up with PHP $PHP_VERSION → http://$DOMAIN"

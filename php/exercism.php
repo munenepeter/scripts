@@ -18,8 +18,7 @@ Submit your solution and check it at the website.
 */
 
 
-function helloWorld():String{
-  
+function helloWorld(): string {
     return "Hello, World!";
 }
 helloWorld();
@@ -32,8 +31,7 @@ For example: input: "cool" output: "looc"
 ----------------------------------------------------------------------------
 */
 
-function reverseString(string $text): String{
-  
+function reverseString(string $text): string {
     return strrev($text);
 }
 reverseString("cool");
@@ -48,32 +46,24 @@ updated at 11.01.2022
 ----------------------------------------------------------------------------
 */
 
-class HighScores{
-  
-public array $scores = [];
-public mixed $latest;
-public mixed $personalBest;
-public array $personalTopThree;
-  
-public function __construct(array $scores):void{
-  
- $this->scores = $scores;
-}
-public function latest():mixed{
-  
-$this->latest = end($this->scores);
-  
-}
-public function personalBest():mixed{
-  
-$this->personalBest =  max($this->scores);
-  
-}
-public function personalTopThree():array{
-  
- rsort($this->scores);
- return array_splice($this->scores, 0, 2);
-  
-}
-}
+class HighScores {
 
+    public array $scores = [];
+    public mixed $latest;
+    public mixed $personalBest;
+    public array $personalTopThree;
+
+    public function __construct(array $scores): void {
+        $this->scores = $scores;
+    }
+    public function latest(): void {
+        $this->latest = end($this->scores);
+    }
+    public function personalBest(): void {
+        $this->personalBest =  max($this->scores);
+    }
+    public function personalTopThree(): array {
+        rsort($this->scores);
+        return array_splice($this->scores, 0, 2);
+    }
+}

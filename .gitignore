@@ -1,2 +1,7 @@
 *.exe
 *.pdf
+*.json
+*.png
+*.zip
+*.txt
+*/vendor/
